@@ -1,0 +1,75 @@
+{% from '_form_helpers.html' import searchfield %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="shortcut icon" href="{{url_for('static', filename = 'teacher.png' )}}">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/dashboard.css')}}">
+	<title>CrUD-WebApp</title>
+</head>
+<body>
+	
+<div class="container">
+	<br>
+	<div class="row justify-content-center">
+		<div class="col-12 col-md-10 col-lg-8">
+			<form action="/search" method="POST" class="card card-sm">
+				{{ form.csrf_token }}
+				<div class="card-body row no-gutters align-items-center">
+					<div class="col-auto">
+						<i class="fas fa-search h4 text-body"></i>
+					</div>
+					<div class="col">
+						{{ searchfield(form.student, placeholder="Search student", class="form-control form-control-lg form-control-borderless") }}
+					</div>
+					<div class="col-auto">
+						<button class="btn btn-lg btn-success" type="submit">Search</button>
+						<a href="/" class="btn btn-lg btn-primary">Back</a>
+					</div>
+					<br>
+				</div>
+			</form>
+		</div>
+	</div>
+	<br>
+	<h3>Results:</h3>
+	<div class="text-center">	
+	<table class="table">
+	  <thead class="thead-dark">
+	    <tr>
+	      <th scope="col">ID Number</th>
+	      <th scope="col">Last Name</th>
+	      <th scope="col">First Name</th>
+	      <th scope="col">Course</th>
+	      <th scope="col">Course ID</th>
+	      <th scope="col">Year Level</th>
+	      <th scope="col">Gender</th>
+	     
+	    </tr>
+	  	{% for data in result %}
+	    <tr>
+			<td>{{ data[0] }}</td>
+			<td>{{ data[1] }}</td>
+			<td>{{ data[2] }}</td>
+			<td>{{ data[3] }}</td>
+			<td>{{ data[4] }}</td>
+			<td>{{ data[5] }}</td>
+			<td>{{ data[6] }}</td>      
+	    </tr>
+	    {% endfor %}
+	  </thead>
+
+	</table>
+	</div>
+</div>
+
+</body>
+
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.slim.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/popper.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+</html>

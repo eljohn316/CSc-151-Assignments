@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css')}}">
+  <link rel="shortcut icon" href="{{url_for('static', filename = 'teacher.png' )}}">
+  <!--CSS for index.html-->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/dashboard.css')}}">
+    
+  <title>CrUD-WebApp</title>
+  </head>
+  <body>
+  {% block content %}
+
+  {% endblock %}
+  
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.slim.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/popper.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+  </body>
+</html>

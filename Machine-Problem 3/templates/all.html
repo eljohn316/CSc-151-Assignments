@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="shortcut icon" href="{{url_for('static', filename = 'teacher.png' )}}">
+	<title>View All</title>
+</head>
+<body>
+	
+<div class="container">
+		<br>
+		<center>
+			<h2>Students' Courses</h2>
+		</center>
+		<div>
+			<a href="/" class="btn btn-primary float-right">Back to Main</a>
+			<a class="btn btn-info" href="/dashboard">Dashboard</a>
+			<a class="btn btn-info" href="/course">Courses</a>
+		</div>
+		<br>
+
+
+
+<div class="text-center">	
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID Number</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Year</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Course</th>
+
+    </tr>
+  	{% for data in result %}
+    <tr>
+		<td>{{ data[0] }}</td>
+		<td>{{ data[1] }}</td>
+		<td>{{ data[2] }}</td>
+		<td>{{ data[3] }}</td>
+		<td>{{ data[4] }}</td>
+		<td>{{ data[5] }}</td>
+		</td>      
+    </tr>
+    {% endfor %}
+  </thead>
+
+</table>
+</div>
+
+
+
+
+
+
+</body>
+
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.slim.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/popper.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+</html>

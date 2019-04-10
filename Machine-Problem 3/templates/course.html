@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="shortcut icon" href="{{url_for('static', filename = 'teacher.png' )}}">
+	<title>Courses</title>
+</head>
+<body>
+	
+<div class="container">
+		<br>
+		<center>
+			<h2>Course List</h2>
+		</center>
+		<div>
+			<a href="/" class="btn btn-primary float-right">Back to Main</a>
+			<a class="btn btn-success" href="/course" role="button" data-toggle="modal" data-target="#modalRegisterForm">Add Course</a>
+			<a class="btn btn-info" href="/dashboard">Dashboard</a>
+		</div>
+		<br>
+
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+		{% for message in messages %}
+			<div class="alert alert-success alert-dismissible fade show" role="alert">
+  				<strong>{{ message }}</strong>
+  				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    			<span aria-hidden="true">&times;</span>
+  				</button>
+			</div>
+		{% endfor %}
+	{% endif %}
+{% endwith %}
+
+<div class="text-center">	
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Course ID</th>
+      <th scope="col">Course Name</th>
+      <th scope="col">Action</th>
+    </tr>
+  	{% for data in data %}
+    <tr>
+		<td><strong>{{ data[0] }}</strong></td>
+		<td>{{ data[1] }}</td>
+		<td>
+		<a href="/update_course/{{ data[0] }}" class="btn btn-warning" data-toggle="modal" data-target="#modaledit{{ data[0] }}">Update</a>
+		<a href="/delete_course/{{ data[0] }}" class="btn btn-danger" onclick="return confirm('Are you sure to delete this record?')">Delete</a>
+
+<div class="modal fade" id="modaledit{{ data[0] }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Updating Record</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<form method = "POST" action="{{ url_for('update_course')}}">
+			<div class="form-group">
+				<div class="alert alert-warning" role="alert">
+		  		<strong>Update course details.</strong>
+				</div>
+				<label>Course ID</label>
+				<input type="text" class="form-control" id="formGroupExampleInput" name="courseid" required>
+				<label>Course Name:</label>
+				<input type="text" class="form-control" id="formGroupExampleInput" name="coursename" required>
+				<br>
+				<div class="text-center">
+					<input class="btn btn-success" type="submit" value="Update Record">
+				</div>
+			</div>
+		</form>
+      </div>
+    </div>
+  </div>
+</div>	
+
+		
+		</td>      
+    </tr>
+    {% endfor %}
+  </thead>
+
+</table>
+</div>
+
+
+
+<div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Fill in the fields below.</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<form method = "POST" action="{{ url_for('course')}}">
+			<div class="form-group">
+				<label>Course ID:</label>
+				<input type="text" class="form-control" id="formGroupExampleInput" name="courseid" required>
+				<label>Course Name:</label>
+				<input type="text" class="form-control" id="formGroupExampleInput" name="coursename" required>
+				<br>
+				<div class="text-center">
+					<input class="btn btn-success" type="submit" value="Add Course">
+				</div>
+			</div>
+		</form>
+      </div>
+    </div>
+  </div>
+</div>	
+</div>	
+
+
+</body>
+
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.slim.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/popper.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+</html>

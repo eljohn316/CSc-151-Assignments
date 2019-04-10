@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="shortcut icon" href="{{url_for('static', filename = 'teacher.png' )}}">
+
+	<title>Student List</title>
+</head>
+<body>
+	
+<div class="container">
+		<br>
+		<center>
+			<h2>Student List</h2>
+		</center>
+		<div>
+			<a href="/" class="btn btn-primary float-right">Back to Main</a>
+			<a class="btn btn-success" href="/dashboard" role="button" data-toggle="modal" data-target="#modalRegisterForm">Add Student</a>
+			<a class="btn btn-info" href="/course">View Courses</a>
+		</div>
+		<br>
+
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+		{% for message in messages %}
+			<div class="alert alert-success alert-dismissible fade show" role="alert">
+  				<strong>{{ message }}</strong>
+  				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    			<span aria-hidden="true">&times;</span>
+  				</button>
+			</div>
+		{% endfor %}
+	{% endif %}
+{% endwith %}
+
+<div class="text-center">	
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID Number</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Course</th>
+      <th scope="col">Course ID</th>
+      <th scope="col">Year Level</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Action</th>
+    </tr>
+  	{% for row in students %}
+    <tr>
+		<td><strong>{{ row[0] }}</strong></td>
+		<td>{{ row[1] }}</td>
+		<td>{{ row[2] }}</td>
+		<td>{{ row[3] }}</td>
+		<td>{{ row[4] }}</td>
+		<td>{{ row[5] }}</td>
+		<td>{{ row[6] }}</td>
+		<td>
+		<a href="/update/{{ row[0] }}" class="btn btn-warning" data-toggle="modal" data-target="#modaledit{{ row[0] }}">Update</a>
+		<a href="/delete/{{ row[0] }}" class="btn btn-danger" onclick="return confirm('Are you sure to delete this record?')">Delete</a>
+
+<div class="modal fade" id="modaledit{{ row[0] }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Updating Record</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<form method = "POST" action="{{ url_for('update')}}">
+			<div class="form-group">
+				<div class="alert alert-warning" role="alert">
+		  		<strong>Updating the student record whose ID is {{ row[0] }}.</strong>
+				</div>
+				<label>ID Number</label>
+				<input type="text" class="form-control" id="formGroupExampleInput" name="idnumber" required>
+				<label>Last Name:</label>
+				<input type="text" class="form-control" id="formGroupExampleInput" name="lastname" required>
+				<label>First Name:</label>
+				<input type="text" class="form-control" id="formGroupExampleInput" name="firstname" required>
+				<label>Course:</label>
+				<input type="text" class="form-control" id="formGroupExampleInput" name="course" required>
+				<label>Course ID:</label>
+				<input type="text" class="form-control" id="formGroupExampleInput" name="courseid" required>
+				<label>Year:</label>
+				<input type="text" class="form-control" id="formGroupExampleInput" name="year" required>
+				<label>Gender:</label>
+				<input type="text" class="form-control" id="formGroupExampleInput" name="gender" required>
+				<br>
+				<div class="text-center">
+					<input class="btn btn-success" type="submit" value="Update Record">
+				</div>
+			</div>
+		</form>
+      </div>
+    </div>
+  </div>
+</div>	
+
+		
+		</td>      
+    </tr>
+    {% endfor %}
+  </thead>
+
+</table>
+</div>
+
+
+
+<div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Fill in the fields below.</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<form method = "POST" action="{{ url_for('dashboard')}}">
+			<div class="form-group">
+				<label>ID Number:</label>
+				<input type="text" class="form-control" id="formGroupExampleInput" name="idnumber" required>
+				<label>Last Name:</label>
+				<input type="text" class="form-control" id="formGroupExampleInput" name="lastname" required>
+				<label>First Name:</label>
+				<input type="text" class="form-control" id="formGroupExampleInput" name="firstname" required>
+				<label>Course:</label>
+				<input type="text" class="form-control" id="formGroupExampleInput" name="course" required>
+				<label>Course ID:</label>
+				<input type="text" class="form-control" id="formGroupExampleInput" name="courseid" required>
+				<label>Year:</label>
+				<input type="text" class="form-control" id="formGroupExampleInput" name="year" required>
+				<label>Gender:</label>
+				<input type="text" class="form-control" id="formGroupExampleInput" name="gender" required>
+				<br>
+				<div class="text-center">
+					<input class="btn btn-success" type="submit" value="Add Student">
+				</div>
+			</div>
+		</form>
+      </div>
+    </div>
+  </div>
+</div>	
+</div>	
+</body>
+
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.slim.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/popper.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+</html>

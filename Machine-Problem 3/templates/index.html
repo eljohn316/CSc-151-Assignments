@@ -1,0 +1,20 @@
+{% extends 'master_layout.html'%}
+{% block content %}
+<center>
+  <div class="jumbotron">
+    <div class="container">
+    	<h1>Welcome!</h1>
+      	<p>This app allows you to store information about students, also allows you update and delete it.</p>
+      	<a href="/dashboard" class="btn btn-primary btn-lg">Dashboard</a>
+      	<a href="/search" class="btn btn-success btn-lg">Search</a>
+      	<a href="/all" class="btn btn-danger btn-lg">View All</a>
+      	<br>
+      	<hr class="style1">
+	  	<h2>Dashboard - contains the list of all students. It is also where you can add a student. You can also update, delete an existing student.</h2>
+	  	<h3>Search - allows you to search the existing student/s.</h3>	
+	  	<h4>View All - is where you can directly see all the students together with their respected courses.
+	  	</h4>
+    </div>
+  </div>
+</center>
+{% endblock %}
